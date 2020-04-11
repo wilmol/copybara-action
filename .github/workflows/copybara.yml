@@ -17,5 +17,11 @@ jobs:
       - name: Pull Copybara image
         run: docker pull sharelatex/copybara
 
+      - name: pwd
+        run: pwd
+
+      - name: ls
+        run: ls
+
       - name: Run Copybara
         run: docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
