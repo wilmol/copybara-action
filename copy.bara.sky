@@ -1,9 +1,3 @@
-# grab copybara.exe from building: https://github.com/google/copybara
-# initially run:
-# copybara copy.bara.sky --init-history --ignore-noop
-# to further sync run:
-# copybara copy.bara.sky --ignore-noop
-
 sourceUrl = "git@github.com:wilmol/coding-practice-java-PRIVATE.git"
 destinationUrl = "git@github.com:wilmol/coding-practice-java.git"
 
