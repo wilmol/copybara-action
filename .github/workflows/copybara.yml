@@ -10,23 +10,13 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install GitHub SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          mkdir ~/.ssh
+          echo $'${{ secrets.SSH_KEY }}' > ~/.ssh/id_rsa
+          echo $'${{ secrets.KNOWN_HOSTS }}' > ~/.ssh/known_hosts
 
       - name: Pull Copybara image
         run: docker pull sharelatex/copybara
-
-      - name: pwd
-        run: pwd
-
-      - name: ls
-        run: ls
-
-      - name: ssh ls
-        run : ls ~/.ssh
 
       - name: Run Copybara
         run: docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
