@@ -6,6 +6,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
 
       - name: Install GitHub SSH key
         uses: shimataro/ssh-key-action@v2
