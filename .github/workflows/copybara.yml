@@ -15,8 +15,13 @@ jobs:
           echo $'${{ secrets.SSH_KEY }}' > ~/.ssh/id_rsa
           echo $'${{ secrets.KNOWN_HOSTS }}' > ~/.ssh/known_hosts
 
+      - name: Install Git config
+        run: |
+          git config --global user.name "wilmol"
+          git config --global user.email willjoemolloy@gmail.com
+
       - name: Pull Copybara image
         run: docker pull sharelatex/copybara
 
       - name: Run Copybara
-        run: docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
+        run: docker run -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
