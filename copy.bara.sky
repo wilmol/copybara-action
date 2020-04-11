@@ -1,0 +1,30 @@
+# grab copybara.exe from building: https://github.com/google/copybara
+# initially run:
+# copybara copy.bara.sky --init-history --ignore-noop
+# to further sync run:
+# copybara copy.bara.sky --ignore-noop
+
+sourceUrl = "git@github.com:wilmol/coding-practice-java-PRIVATE.git"
+destinationUrl = "git@github.com:wilmol/coding-practice-java.git"
+
+core.workflow(
+    name = "default",
+    origin = git.origin(
+        url = sourceUrl,
+        ref = "master",
+    ),
+    destination = git.destination(
+        url = destinationUrl,
+        fetch = "master",
+        push = "master",
+    ),
+
+    origin_files = glob(["leetcode/**", "project-euler/**", "hackerrank/**", "gradle/**", "copybara/**",
+        ".gitattributes", ".gitignore", "build.gradle", "gradlew", "gradlew.bat", "LICENSE", "codecov.yml"]),
+
+    mode = "ITERATIVE",
+    authoring = authoring.pass_thru("wilmol <willjoemolloy@gmail.com>"),
+    transformations = [
+        core.move("copybara", ""),
+    ],
+)
