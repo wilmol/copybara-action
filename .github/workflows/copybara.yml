@@ -25,5 +25,8 @@ jobs:
       - name: ls
         run: ls
 
+      - name: ssh ls
+        run : ls ~/.ssh
+
       - name: Run Copybara
         run: docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
