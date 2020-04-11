@@ -1,0 +1,21 @@
+name: copybara
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Install GitHub SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Pull Copybara image
+        run: docker pull sharelatex/copybara
+
+      - name: Run Copybara
+        run: docker run -v ~/.ssh:/root/.ssh -v "$(pwd)":/usr/src/app -it sharelatex/copybara copybara
