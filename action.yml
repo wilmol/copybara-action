@@ -1,22 +1,22 @@
-name: "Copybara"
-description: "GitHub Action that runs Copybara"
-author: "Will Molloy <willjoemolloy@gmail.com>"
+name: "copybara-action"
+description: "Runs Copybara in GitHub Actions"
+author: "Will Molloy <willjoemolloy@gmail.com> & Ji Paik <jjeonie@gmail.com>"
 
 inputs:
   git_name:
-    description: "Name to use when authoring commits"
+    description: "git config username, for authoring with Copybara"
     required: true
   git_email:
-    description: "Email address to use when authoring commits"
+    description: "git config email, for authoring with Copybara"
     required: true
   ssh_key:
-    description: "SSH public key for authenticating with the destination repository"
+    description: "ssh public key, for authenticating with Copybara"
     required: true
   ssh_known_hosts:
-    description: "SSH known hosts file contents with the destination repository's fingerprint"
+    description: "ssh known hosts file contents, for authenticating with Copybara"
     required: true
   path:
-    description: "Path to copy.bara.sky"
+    description: "copy.bara.sky file path"
     required: false
     default: "."
 
