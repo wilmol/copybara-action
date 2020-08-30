@@ -1,0 +1,45 @@
+name: "Copybara"
+description: "GitHub Action that runs Copybara"
+author: "Will Molloy <willjoemolloy@gmail.com>"
+
+inputs:
+  git_name:
+    description: "Name to use when authoring commits"
+    required: true
+  git_email:
+    description: "Email address to use when authoring commits"
+    required: true
+  ssh_key:
+    description: "SSH public key for authenticating with the destination repository"
+    required: true
+  ssh_known_hosts:
+    description: "SSH known hosts file contents with the destination repository's fingerprint"
+    required: true
+  path:
+    description: "Path to copy.bara.sky"
+    required: false
+    default: "."
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        mkdir ~/.ssh
+        echo $'${{ inputs.ssh_key }}' > ~/.ssh/id_rsa
+        echo $'${{ inputs.ssh_known_hosts }}' > ~/.ssh/known_hosts
+      shell: bash
+
+    - run: |
+        git config --global user.name ${{ inputs.git_name }}
+        git config --global user.email ${{ inputs.git_email }}
+      shell: bash
+
+    - run: docker pull sharelatex/copybara:latest
+      shell: bash
+
+    - run: docker run -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara ${{ inputs.path }}
+      shell: bash
+
+branding:
+  icon: 'copy'
+  color: 'blue'

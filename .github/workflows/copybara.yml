@@ -9,19 +9,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
 
-      - name: Install GitHub SSH key
-        run: |
-          mkdir ~/.ssh
-          echo $'${{ secrets.SSH_KEY }}' > ~/.ssh/id_rsa
-          echo $'${{ secrets.KNOWN_HOSTS }}' > ~/.ssh/known_hosts
-
-      - name: Install Git config
-        run: |
-          git config --global user.name "wilmol"
-          git config --global user.email willjoemolloy@gmail.com
-
-      - name: Pull Copybara image
-        run: docker pull sharelatex/copybara
-
-      - name: Run Copybara
-        run: docker run -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara
+      - name: Test wilmol/copybara-action
+        uses: wilmol/copybara-action@master
+        with:
+          git_name: wilmol
+          git_email: willjoemolloy@gmail.com
+          ssh_key: ${{ secrets.SSH_KEY }}
+          ssh_known_hosts: ${{ secrets.KNOWN_HOSTS }}
