@@ -1,6 +1,6 @@
 # copybara-action
 
-Runs [Copybara](https://github.com/google/copybara) in GitHub Actions
+Runs [Copybara](https://github.com/google/copybara) in GitHub Actions. Copybara transforms and moves code between repositories.
 
 ## Usage
 Specify `wilmol/copybara-action@v1` as a `step` in your `workflow.yml` file, for example:

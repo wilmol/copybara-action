@@ -1,5 +1,5 @@
-name: "copybara-action"
-description: "Runs Copybara in GitHub Actions"
+name: "Copybara Action"
+description: "Transforms and moves code between repositories."
 author: "Will Molloy <willjoemolloy@gmail.com> & Ji Paik <jjeonie@gmail.com>"
 
 inputs:
