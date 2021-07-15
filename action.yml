@@ -37,7 +37,7 @@ runs:
     - run: docker pull sharelatex/copybara:latest
       shell: bash
 
-    - run: docker run -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig -v "$(pwd)":/usr/src/app -i sharelatex/copybara copybara ${{ inputs.path }}
+    - run: docker run -v ~/.ssh:/root/.ssh -v ~/.gitconfig:/root/.gitconfig -v "$(pwd)":/usr/src/app -e COPYBARA_CONFIG=${{ inputs.path }} -i sharelatex/copybara copybara
       shell: bash
 
 branding:
